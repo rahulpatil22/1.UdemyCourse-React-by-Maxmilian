@@ -19,10 +19,10 @@ function App() {
 
   return (
     // inside AddUser comp we need to utilise this OnAddUser prop.inside addUserHandler(in adduserComp),call props.onAddUser instead of console.log
-    <div>
+    <React.Fragment>
 <AddUser onAddUser={addUserHandler}/>
 <UserList users ={usersList}/>
-    </div>
+    </React.Fragment>
   );
 }
 
