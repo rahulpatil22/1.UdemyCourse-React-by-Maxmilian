@@ -56,4 +56,33 @@ type Person =  {           //right side value is not js ,its a type defination ,
     age:number;
 }  
 let person1:Person;  //this Person type , it will define once but can use it many places where i need it
-let person2:Person[];  // or use like as an array of full of persons          
+let person2:Person[];  // or use like as an array of full of persons 
+
+
+//functions and types
+function Add(a:number ,b:number):number {
+return a + b;  // infererred return value type:number
+}
+function printout(value:any):void {
+console.log(value);  // this function has nothing to return = so function type is void
+}
+
+//Generics
+function inserAtBeginning<T>(array:T [],value:T){  //utility function
+const newArray = [value,...array];
+return newArray;
+}
+
+const demoArray = [1,2,3];
+const updatedArray = inserAtBeginning(demoArray,-1); //{-1,1,2,3}
+
+// after wanna do things with that array, which we can do with an array full of numbers.the propble is that updated array,is inferred to be type of any array
+//so an array full of any kind of values,typescript here doesn't pick up that its an array full of numbers beacuse we define array as any type
+//and we cant say that we only allow numbers here,beacuse if we want to use this utility function with an array full strings? so we need any but at the same time
+//that kind of removes all kind of Typescript support we might be getting after calling this function, we not getting any good Typescript support
+// for updatedArray thereafter, becuase that is an inferred to be an array full of any kind of objects or values and thats not useful
+// so work around with this kind of problem is- Generics
+// with this Generics feature we can convert this function(utility function) to a generic function with syntax <T>
+// using Generic feature we telling typescript that the type here is actaully not any type,it not any kind of value
+//instead we tell it that the type of this array and of this value should be the same just that this is an array, but it is an array full of the same types of values as this single value has it
+// this feature help us write type safe code and flexible
